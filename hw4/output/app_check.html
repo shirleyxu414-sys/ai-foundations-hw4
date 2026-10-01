@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Customs: App Check</title>
+<style>
+  :root { --yale:#00356b; --gold:#c9a24a; --cream:#f6efdd; --paper:#fdfbf6; --line:#e6dfcd; --ink:#10233f; --muted:#56627a; --ok:#1d7a46; --bad:#b3261e; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.55 -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color:var(--ink); background:var(--paper); }
+  header { background:var(--yale); color:#fff; padding:2rem clamp(1rem,5vw,3rem); border-bottom:4px solid var(--gold); }
+  header h1 { margin:0 0 .3rem; font-family:Georgia,serif; font-size:2rem; }
+  header p { margin:0; color:#dbe6f5; }
+  main { max-width:1100px; margin:0 auto; padding:1.5rem clamp(1rem,4vw,2rem) 4rem; }
+  h2.group { font-family:Georgia,serif; color:var(--yale); border-bottom:3px solid var(--gold); padding-bottom:.3rem; margin:2.2rem 0 1rem; }
+  .summary { display:flex; flex-wrap:wrap; gap:1rem; margin:1rem 0 1.5rem; }
+  .stat { flex:1 1 160px; background:#fff; border:1px solid var(--line); border-top:4px solid var(--gold); border-radius:12px; padding:1rem 1.2rem; }
+  .stat b { display:block; font-size:1.8rem; color:var(--yale); }
+  .stat span { color:var(--muted); font-size:.9rem; }
+  nav.toc { background:var(--cream); border:1px solid var(--line); border-radius:12px; padding:1rem 1.4rem; margin-bottom:1rem; }
+  nav.toc h2 { margin:.1rem 0 .5rem; font-size:1rem; color:var(--yale); text-transform:uppercase; letter-spacing:.08em; }
+  nav.toc ul { list-style:none; margin:0; padding-left:0; columns:2; column-gap:2rem; }
+  nav.toc a { color:var(--yale); text-decoration:none; } nav.toc a:hover { text-decoration:underline; }
+  .pill { display:inline-block; padding:.05rem .55rem; border-radius:999px; font-size:.72rem; font-weight:700; color:#fff; vertical-align:middle; }
+  .pill.ok { background:var(--ok); } .pill.bad { background:var(--bad); }
+  article.check { background:#fff; border:1px solid var(--line); border-radius:16px; padding:1.3rem 1.6rem 1.1rem; margin:0 0 1.8rem; box-shadow:0 2px 10px rgba(0,53,107,.06); }
+  article.check.req { border:2px solid var(--gold); }
+  article.check h3 { margin:0 0 .8rem; font-family:Georgia,serif; color:var(--yale); font-size:1.3rem; }
+  figure { margin:0 0 .9rem; }
+  figure img { display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:10px; }
+  .proves { margin:0 0 .9rem; padding:.7rem .9rem; background:var(--cream); border-left:5px solid var(--gold); border-radius:6px; }
+  details summary { cursor:pointer; color:var(--muted); font-size:.9rem; margin-bottom:.3rem; }
+  ul.checks { list-style:none; margin:0; padding:0; }
+  ul.checks li { display:flex; gap:.6rem; padding:.3rem 0; border-top:1px solid #f0ead9; font-size:.93rem; }
+  .mark { flex:0 0 3.3rem; font-weight:800; font-size:.76rem; letter-spacing:.06em; padding-top:.15rem; }
+  .mark.ok { color:var(--ok); } .mark.bad { color:var(--bad); }
+  .detail { display:block; color:var(--muted); font-size:.84rem; overflow-wrap:anywhere; }
+  footer { color:var(--muted); font-size:.85rem; border-top:1px solid var(--line); padding-top:1rem; }
+  code { background:var(--cream); padding:.1rem .35rem; border-radius:4px; }
+  @media (max-width:700px) { nav.toc ul { columns:1; } }
+</style></head><body>
+<header><h1>Campus Customs: App Check</h1>
+<p>Automated test of the live site in real Chrome, run 9/29/2026, 9:58:58 PM. Site http://localhost:5173. AI model <code style="background:#0a4a8c;color:#fff">gpt-5.6-luna</code> through Portkey. Every answer is checked against <code style="background:#0a4a8c;color:#fff">data/campus_customs.db</code>.</p></header>
+<main>
+<div class="summary">
+  <div class="stat"><b>154/154</b><span>automated checks passed</span></div>
+  <div class="stat"><b>26</b><span>screenshots</span></div>
+  <div class="stat"><b>3/3</b><span>required checks shown</span></div>
+  <div class="stat"><b>PASS</b><span>overall result</span></div>
+</div>
+<nav class="toc"><h2>Contents</h2><ul>
+<li><a href="#R1">R1. Chat checks stock and price for an item</a> <span class="pill ok">PASS</span></li>
+<li><a href="#R2">R2. Category question fills the page with product cards</a> <span class="pill ok">PASS</span></li>
+<li><a href="#R3">R3. Usability feature: search and sort (Problem 9)</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c1">1. Yale banner and home page</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c2">2. Home feature cards</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c3">3. Composed hero section</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c4">4. Chatbot made easy to find</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c5">5. Find your people cards</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c6">6. About Us page</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c7">7. Home collection opens matching products</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c8">8. Readable Yale colors</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c9">9. Product grid of collectible cards</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c10">10. Card hover effect</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c11">11. Product detail page</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c12">12. Gold sale badge (simulated data)</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c13">13. Create account form</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c14">14. Signed up and logged in</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c15">15. Log in: wrong password message</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c16">16. Bulldog Bot chat window</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c17">17. Sold-out size stated clearly</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c18">18. The agent knows which product you are viewing</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c19">19. Compare two items</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c20">20. Customer memory across visits</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c21">21. Guests can chat but are not stored</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c22">22. Chat rate limit</a> <span class="pill ok">PASS</span></li>
+<li><a href="#c23">23. Phone-sized screen</a> <span class="pill ok">PASS</span></li>
+</ul></nav>
+
+<h2 class="group">Required checks</h2>
+<article class="check req" id="R1">
+<h3>R1. Chat checks stock and price for an item <span class="pill ok">PASS</span></h3>
+<figure><img alt="Chat checks stock and price for an item" src="app_check_images/stock-price.png"></figure>
+<p class="proves"><b>What this shows:</b> Asked how many Fencing Left Chest Hoodies are left in XL and the price, the agent answered from the database: quantity 2 in XL and $68.00. Both numbers match the inventory and catalogue tables.</p>
+<details open><summary>Automated assertions for this feature (7/7 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Price in the answer equals the database price<span class="detail">db $72.0</span></span></li>
+<li><span class="mark ok">PASS</span><span>Database: Fencing Left Chest Hoodie XL quantity = 2, price = $68.00</span></li>
+<li><span class="mark ok">PASS</span><span>Stock in the answer equals the database<span class="detail">The Fencing Left Chest Hoodie has only 2 left in XL and costs $68.00. Woof! 🐾</span></span></li>
+<li><span class="mark ok">PASS</span><span>Price in the answer equals the database<span class="detail">$68.00</span></span></li>
+<li><span class="mark ok">PASS</span><span>Database says size L is sold out (quantity 0)</span></li>
+<li><span class="mark ok">PASS</span><span>Agent says clearly that it is sold out<span class="detail">The Champion Reverse Weave Crewneck is sold out in L. It’s currently in stock in M and XL.</span></span></li>
+<li><span class="mark ok">PASS</span><span>Agent offers the sizes that are in stock<span class="detail">M, XL</span></span></li>
+</ul></details>
+</article>
+<article class="check req" id="R2">
+<h3>R2. Category question fills the page with product cards <span class="pill ok">PASS</span></h3>
+<figure><img alt="Category question fills the page with product cards" src="app_check_images/chat-results.png"></figure>
+<p class="proves"><b>What this shows:</b> After asking "What hoodies do you have?" the agent searched the database and the site switched to the Products page showing 27 hoodie cards (the database holds 27 hoodies), each with image, name, price and description. The chat panel stays beside the cards without covering them.</p>
+<details open><summary>Automated assertions for this feature (4/4 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Page switched to the Products page with a "From the chat" banner<span class="detail">Yale Hoodies</span></span></li>
+<li><span class="mark ok">PASS</span><span>Cards match the hoodies in the database<span class="detail">27 cards shown of 27 hoodies in the database</span></span></li>
+<li><span class="mark ok">PASS</span><span>Every card is a real catalogue item</span></li>
+<li><span class="mark ok">PASS</span><span>A card added by the chat opens its detail page<span class="detail">http://localhost:5173/products/basic-hoodie-big-yale</span></span></li>
+</ul></details>
+</article>
+<article class="check req" id="R3">
+<h3>R3. Usability feature: search and sort (Problem 9) <span class="pill ok">PASS</span></h3>
+<figure><img alt="Usability feature: search and sort (Problem 9)" src="app_check_images/search.png"></figure>
+<p class="proves"><b>What this shows:</b> Typing "navy hockey" instantly narrowed the 102 products to 5 matches, and the sort menu reorders them by price (verified by the assertions below). This is one of the Problem 9 usability improvements.</p>
+<details open><summary>Automated assertions for this feature (5/5 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>"navy hockey" narrows the grid<span class="detail">5 items: Ice Hockey Left Chest Hoodie | Tri Blend Sports Hockey T Shirt | Yale Sports Creqneck Field Hockey</span></span></li>
+<li><span class="mark ok">PASS</span><span>Sort price low to high<span class="detail">32, 32, 58, 68, 68</span></span></li>
+<li><span class="mark ok">PASS</span><span>Sort price high to low<span class="detail">68, 68, 58, 32, 32</span></span></li>
+<li><span class="mark ok">PASS</span><span>No match shows a friendly message and a Clear search button</span></li>
+<li><span class="mark ok">PASS</span><span>Clear search restores the full catalogue</span></li>
+</ul></details>
+</article>
+
+<h2 class="group">All other features</h2>
+<article class="check" id="c1">
+<h3>1. Yale banner and home page <span class="pill ok">PASS</span></h3>
+<figure><img alt="Yale banner and home page" src="app_check_images/home.png"></figure>
+<p class="proves"><b>What this shows:</b> The top bar is deep Yale blue with white links and a gold underline under the current page (Home), on a light cream-and-white page. The nav has all five required links.</p>
+<details open><summary>Automated assertions for this feature (13/13 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Nav bar has the 5 required links<span class="detail">Home | Products | About Us | Log in | Create account</span></span></li>
+<li><span class="mark ok">PASS</span><span>Nav bar is deep Yale blue with white text<span class="detail">background rgb(0, 53, 107), active link rgb(255, 255, 255)</span></span></li>
+<li><span class="mark ok">PASS</span><span>Current page (Home) has a gold underline<span class="detail">underline rgb(201, 162, 74)</span></span></li>
+<li><span class="mark ok">PASS</span><span>Page background is light and airy<span class="detail">background rgb(253, 251, 246)</span></span></li>
+<li><span class="mark ok">PASS</span><span>Three feature cards each have a large icon (medal, ruler, robot)<span class="detail">XS through XXL: 44px icon | Officially licensed: 44px icon | Straight from the stockroom: 44px icon</span></span></li>
+<li><span class="mark ok">PASS</span><span>Icons are Yale Blue<span class="detail">rgb(0, 53, 107) rgb(0, 53, 107) rgb(0, 53, 107)</span></span></li>
+<li><span class="mark ok">PASS</span><span>Top edges are navy, medium blue and gold (all different)<span class="detail">rgb(0, 33, 71) | rgb(40, 109, 192) | rgb(201, 162, 74)</span></span></li>
+<li><span class="mark ok">PASS</span><span>The middle card is "Officially licensed", with the ruler and robot cards on either side<span class="detail">XS through XXL | Officially licensed | Straight from the stockroom</span></span></li>
+<li><span class="mark ok">PASS</span><span>Middle card is dark blue with white text<span class="detail">rgb(0, 53, 107), text rgba(255, 255, 255, 0.9)</span></span></li>
+<li><span class="mark ok">PASS</span><span>The other two cards are white with blue headings</span></li>
+<li><span class="mark ok">PASS</span><span>Hovering a feature card lifts it and adds a soft shadow<span class="detail">lifted 6px</span></span></li>
+<li><span class="mark ok">PASS</span><span>The shop is called Campus Customs everywhere (no borrowed store name)<span class="detail">title "Campus Customs · Yale Apparel"</span></span></li>
+<li><span class="mark ok">PASS</span><span>Underline moves to the current page (Products)</span></li>
+</ul></details>
+</article>
+<article class="check" id="c2">
+<h3>2. Home feature cards <span class="pill ok">PASS</span></h3>
+<figure><img alt="Home feature cards" src="app_check_images/feature-cards.png"></figure>
+<p class="proves"><b>What this shows:</b> The three feature cards no longer look alike: each has a large Yale-blue icon (medal, ruler, robot) and a different top edge (navy, medium blue, gold), and the middle card stands out in dark blue with white text.</p>
+<p class="detail">Automated assertions for this feature are listed under its first screenshot.</p>
+</article>
+<article class="check" id="c3">
+<h3>3. Composed hero section <span class="pill ok">PASS</span></h3>
+<figure><img alt="Composed hero section" src="app_check_images/hero.png"></figure>
+<p class="proves"><b>What this shows:</b> The headline breaks cleanly ("Wear your corner / of Yale") and the text block is tighter, with the same paragraph and both buttons ("Ask Bulldog Bot" opens the chat). A sharp 900px photo of a navy Champion Yale hoodie sits in a white rounded card with a soft shadow on the right, in front of the skyline, so the hero reads as one composed block.</p>
+<details open><summary>Automated assertions for this feature (11/11 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Headline breaks cleanly as "Wear your corner" / "of Yale" (Yale is not alone)<span class="detail">Wear your corner / of Yale (2 lines)</span></span></li>
+<li><span class="mark ok">PASS</span><span>Gaps eyebrow→headline, headline→paragraph, paragraph→buttons are about one third smaller (were 16 / 8 / 25.6 px)<span class="detail">now 10.4 / 5.6 / 16.8 px</span></span></li>
+<li><span class="mark ok">PASS</span><span>Both buttons are still there (the second is renamed) and all other text is unchanged<span class="detail">Browse the catalogue | Ask Bulldog Bot</span></span></li>
+<li><span class="mark ok">PASS</span><span>The renamed button starts with a small speech-bubble icon<span class="detail">{"text":"Ask Bulldog Bot","iconFirst":true,"iconW":20,"iconBeforeText":true}</span></span></li>
+<li><span class="mark ok">PASS</span><span>The other pages keep their own wording (the sign-up form still says "Join the pack")</span></li>
+<li><span class="mark ok">PASS</span><span>A real navy hoodie photo stands on the right side of the hero<span class="detail">363px card</span></span></li>
+<li><span class="mark ok">PASS</span><span>The photo is a sharp original (900px) shown at about 340px, never enlarged past its natural size<span class="detail">natural 900px, shown 338px, object-fit cover</span></span></li>
+<li><span class="mark ok">PASS</span><span>The hero is smaller: at most 470px tall (it was 588px)<span class="detail">462px tall</span></span></li>
+<li><span class="mark ok">PASS</span><span>It sits in a white rounded card with a soft shadow, slightly tilted<span class="detail">radius 16px, tilt -4°</span></span></li>
+<li><span class="mark ok">PASS</span><span>It stands in front of the skyline, which stays a background layer</span></li>
+<li><span class="mark ok">PASS</span><span>It does not overlap the text</span></li>
+</ul></details>
+</article>
+<article class="check" id="c4">
+<h3>4. Chatbot made easy to find <span class="pill ok">PASS</span></h3>
+<figure><img alt="Chatbot made easy to find" src="app_check_images/chat-visibility.png"></figure>
+<p class="proves"><b>What this shows:</b> On a first visit the bottom-right shows the bulldog-face button with its gold border and pulse ring, plus an "Ask me anything" bubble, and the hero has an "Ask Bulldog Bot" button that opens the chat. The chat itself stays closed until someone chooses to open it.</p>
+<details open><summary>Automated assertions for this feature (16/16 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Button shows the bulldog mascot face, bigger than before<span class="detail">68px</span></span></li>
+<li><span class="mark ok">PASS</span><span>Thin gold border and a soft shadow<span class="detail">2px rgb(201, 162, 74)</span></span></li>
+<li><span class="mark ok">PASS</span><span>A gold ring pulses outward on a 3-second loop<span class="detail">{"name":"chat-ring","dur":"3s","iter":"infinite","color":"rgb(201, 162, 74)"}</span></span></li>
+<li><span class="mark ok">PASS</span><span>The ring really animates, fading in and out (subtle: never above 0.6 opacity)<span class="detail">0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.54 0.35 0.20 0.08 0.01 0.00 0.00 0.00 0.00 0.00</span></span></li>
+<li><span class="mark ok">PASS</span><span>First visit: an "Ask me anything" bubble sits next to the button<span class="detail">{"text":"Ask me anything","leftOfButton":true,"sameRow":true}</span></span></li>
+<li><span class="mark ok">PASS</span><span>The chat panel is NOT opened automatically</span></li>
+<li><span class="mark ok">PASS</span><span>Opening the chat does not move the hero or anything else behind it<span class="detail">hero stays at 90, 104, 1100, 462.4</span></span></li>
+<li><span class="mark ok">PASS</span><span>The panel floats: fixed, 20px from the bottom-right corner, 360px wide, at most 500px tall, z-index 1000, soft shadow<span class="detail">{"pos":"fixed","right":20,"bottom":20,"w":360,"h":500,"z":"1000","shadow":"rgba(0, 33, 71, 0.3) 0px 24px 60px 0px, rgba(0, 33, 71, 0.16) 0px 6px 18px 0px"}</span></span></li>
+<li><span class="mark ok">PASS</span><span>It floats above the page, including the top banner</span></li>
+<li><span class="mark ok">PASS</span><span>The hero "Ask Bulldog Bot" button opens the chat panel</span></li>
+<li><span class="mark ok">PASS</span><span>Once the chat is opened the bubble disappears</span></li>
+<li><span class="mark ok">PASS</span><span>The bubble stays hidden on later visits, and the chat stays closed</span></li>
+<li><span class="mark ok">PASS</span><span>While the chat is open the button steps aside (the panel takes its corner)</span></li>
+<li><span class="mark ok">PASS</span><span>Closing the chat brings the button back</span></li>
+<li><span class="mark ok">PASS</span><span>Closing the chat leaves the page exactly as it was</span></li>
+<li><span class="mark ok">PASS</span><span>On the Products page, opening the chat does not move the grid or filters<span class="detail">grid stays at 90, 453.5, 1100, 12913.2</span></span></li>
+</ul></details>
+</article>
+<article class="check" id="c5">
+<h3>5. Find your people cards <span class="pill ok">PASS</span></h3>
+<figure><img alt="Find your people cards" src="app_check_images/find-your-people.png"></figure>
+<p class="proves"><b>What this shows:</b> Four cards in a row, each with a light-blue round icon (house, hockey stick, graduation cap, family), a big pale number behind the title, and one specific place named in the text (Old Campus, Ingalls Rink, commencement, the Yale Bowl).</p>
+<details open><summary>Automated assertions for this feature (7/7 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Four cards sit in one row<span class="detail">Residential Colleges | Varsity Sports | Graduate Schools | Yale Family</span></span></li>
+<li><span class="mark ok">PASS</span><span>Each card has a round, light-blue icon in Yale Blue (house, hockey stick, graduation cap, family)<span class="detail">rgb(217, 232, 248) rgb(217, 232, 248) rgb(217, 232, 248) rgb(217, 232, 248)</span></span></li>
+<li><span class="mark ok">PASS</span><span>Numbers 01 to 04 are large and very light grey<span class="detail">104px rgb(236, 236, 236)</span></span></li>
+<li><span class="mark ok">PASS</span><span>The title sits on top of the number (they overlap, and the title is in front)</span></li>
+<li><span class="mark ok">PASS</span><span>Each card names one specific place or thing<span class="detail">Old Campus, Ingalls Rink, commencement, Yale Bowl</span></span></li>
+<li><span class="mark ok">PASS</span><span>Hover: border turns Yale Blue and the arrow slides right<span class="detail">border rgb(230, 223, 205) -&gt; rgb(0, 53, 107), arrow moved 8px</span></span></li>
+<li><span class="mark ok">PASS</span><span>The game-day banner below is unchanged<span class="detail">GAME DAY FORECAST: CHILLY Layer up before kickoff Heavyweight hoodies </span></span></li>
+</ul></details>
+</article>
+<article class="check" id="c6">
+<h3>6. About Us page <span class="pill ok">PASS</span></h3>
+<figure><img alt="About Us page" src="app_check_images/about.png"></figure>
+<p class="proves"><b>What this shows:</b> The first three cards sit in one row, each with a Yale-blue icon (building, graduate cap, t-shirt). The chatbot card is now a full-width dark-blue banner with a paw icon, and the last line has a gold button that opens the chat. All the card text is unchanged.</p>
+<details open><summary>Automated assertions for this feature (7/7 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>The first three cards sit in one row<span class="detail">Who we are | Who we dress | What’s on the racks</span></span></li>
+<li><span class="mark ok">PASS</span><span>Each small card has a Yale-blue icon (building, graduate cap, t-shirt)</span></li>
+<li><span class="mark ok">PASS</span><span>The chatbot card is a full-width banner below the row<span class="detail">banner 1000px, row 1000px</span></span></li>
+<li><span class="mark ok">PASS</span><span>The banner is dark blue with white text and a paw icon<span class="detail">rgb(0, 53, 107), text rgba(255, 255, 255, 0.92)</span></span></li>
+<li><span class="mark ok">PASS</span><span>All card text is unchanged</span></li>
+<li><span class="mark ok">PASS</span><span>The last line has a gold "Start a chat with our assistant" button and keeps its wording<span class="detail">Questions about an order? Start a chat with our assistant and it'll point you in the right direction. 💙</span></span></li>
+<li><span class="mark ok">PASS</span><span>The gold button opens the chat panel, like the hero button</span></li>
+</ul></details>
+</article>
+<article class="check" id="c7">
+<h3>7. Home collection opens matching products <span class="pill ok">PASS</span></h3>
+<figure><img alt="Home collection opens matching products" src="app_check_images/collection-sports.png"></figure>
+<p class="proves"><b>What this shows:</b> Clicking "Varsity Sports" on the home page opened only the team-themed items (hockey, baseball, sailing and so on) under a "Collection" banner, not the whole catalogue. Each of the other collections opens its own different set (see the assertions).</p>
+<details open><summary>Automated assertions for this feature (14/14 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>"Residential Colleges" opens 19 products, all matching, with its own banner<span class="detail">19 products, e.g. Benjamin Franklin 1 4 Zip | Benjamin Franklin Fleece Jacket</span></span></li>
+<li><span class="mark ok">PASS</span><span>"Residential Colleges": every category button shows items (none are empty)<span class="detail">All, Crewnecks, T-shirts, Quarter-zips, Jackets</span></span></li>
+<li><span class="mark ok">PASS</span><span>"Varsity Sports" opens 33 products, all matching, with its own banner<span class="detail">33 products, e.g. Baseball Left Chest Crewneck | Crew Left Chest Hoodie</span></span></li>
+<li><span class="mark ok">PASS</span><span>"Varsity Sports": every category button shows items (none are empty)<span class="detail">All, Hoodies, Crewnecks, T-shirts</span></span></li>
+<li><span class="mark ok">PASS</span><span>"Graduate Schools" opens 13 products, all matching, with its own banner<span class="detail">13 products, e.g. Divinity School Fleece Sweater | School Of Architecture Crewneck</span></span></li>
+<li><span class="mark ok">PASS</span><span>"Graduate Schools": every category button shows items (none are empty)<span class="detail">All, Hoodies, T-shirts, Quarter-zips, Jackets</span></span></li>
+<li><span class="mark ok">PASS</span><span>"Yale Family" opens 12 products, all matching, with its own banner<span class="detail">12 products, e.g. Yale Aunt Hoodie | Yale Brother Crewneck</span></span></li>
+<li><span class="mark ok">PASS</span><span>"Yale Family": every category button shows items (none are empty)<span class="detail">All, Hoodies, Crewnecks, T-shirts</span></span></li>
+<li><span class="mark ok">PASS</span><span>"Warm layers" opens 35 products, all matching, with its own banner<span class="detail">35 products, e.g. Basic Hoodie Big Yale | Benjamin Franklin Fleece Jacket</span></span></li>
+<li><span class="mark ok">PASS</span><span>"Warm layers": every category button shows items (none are empty)<span class="detail">All, Hoodies, Jackets</span></span></li>
+<li><span class="mark ok">PASS</span><span>Warm layers has no T-shirts button, since it holds only hoodies and jackets<span class="detail">All, Hoodies, Jackets</span></span></li>
+<li><span class="mark ok">PASS</span><span>No two collections show the same products<span class="detail">colleges: 19, sports: 33, schools: 13, family: 12, warm: 35</span></span></li>
+<li><span class="mark ok">PASS</span><span>Spot checks: colleges include Berkeley and exclude the family hoodies; family includes Mom Hoodie</span></li>
+<li><span class="mark ok">PASS</span><span>"Show all products" from a collection returns all 102</span></li>
+</ul></details>
+</article>
+<article class="check" id="c8">
+<h3>8. Readable Yale colors <span class="pill ok">PASS</span></h3>
+<figure><img alt="Readable Yale colors" src="app_check_images/products-colors.png"></figure>
+<p class="proves"><b>What this shows:</b> The whole Products page uses the light Yale palette, and every text and background pair measured in the assertions below is at least 4.5:1, so text stays easy to read.</p>
+<details open><summary>Automated assertions for this feature (5/5 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Body text on page: 15.2:1<span class="detail">rgb(16, 35, 63) on rgb(253, 251, 246)</span></span></li>
+<li><span class="mark ok">PASS</span><span>Product description (muted text) on card: 6.1:1<span class="detail">rgb(86, 98, 122) on rgb(255, 255, 255)</span></span></li>
+<li><span class="mark ok">PASS</span><span>Price (navy) on card: 16.0:1<span class="detail">rgb(0, 33, 71) on rgb(255, 255, 255)</span></span></li>
+<li><span class="mark ok">PASS</span><span>Category label (gold text) on card: 5.9:1<span class="detail">rgb(127, 95, 20) on rgb(255, 255, 255)</span></span></li>
+<li><span class="mark ok">PASS</span><span>White text on the blue banner: 12.2:1<span class="detail">rgba(255, 255, 255, 0.82) on rgb(0, 53, 107)</span></span></li>
+</ul></details>
+</article>
+<article class="check" id="c9">
+<h3>9. Product grid of collectible cards <span class="pill ok">PASS</span></h3>
+<figure><img alt="Product grid of collectible cards" src="app_check_images/product-grid.png"></figure>
+<p class="proves"><b>What this shows:</b> All 102 products from the database appear as white bordered cards with picture, name, description, a bold navy price, and size chips: blue for in stock, grey and crossed out for sold out.</p>
+<details open><summary>Automated assertions for this feature (14/14 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>On the full catalogue every category button shows items<span class="detail">All, Hoodies, Crewnecks, T-shirts, Quarter-zips, Jackets, More</span></span></li>
+<li><span class="mark ok">PASS</span><span>All 102 catalogue items are shown<span class="detail">102 cards</span></span></li>
+<li><span class="mark ok">PASS</span><span>Card count matches the database<span class="detail">db 102</span></span></li>
+<li><span class="mark ok">PASS</span><span>Card style: white, thin border, rounded, soft shadow<span class="detail">{"bg":"rgb(255, 255, 255)","radius":"16px","border":"1px","shadow":"rgba(0, 53, 107, 0.08) 0px 2px 10px 0px"}</span></span></li>
+<li><span class="mark ok">PASS</span><span>Price is bold navy<span class="detail">{"color":"rgb(0, 33, 71)","weight":"800"}</span></span></li>
+<li><span class="mark ok">PASS</span><span>First card price equals the database price<span class="detail">2025 Yale Vs Harvard T Shirt: $32.00</span></span></li>
+<li><span class="mark ok">PASS</span><span>Pictures load from the database image paths</span></li>
+<li><span class="mark ok">PASS</span><span>All 102 image files are served<span class="detail">102 images</span></span></li>
+<li><span class="mark ok">PASS</span><span>Every photo frame is square and no photo overlaps its card text, even for tall or wide photos<span class="detail">102 cards checked (10 photos are not square)</span></span></li>
+<li><span class="mark ok">PASS</span><span>Every visible product photo has a white background (no black patches)<span class="detail">93 photos checked, darkest corner value 242</span></span></li>
+<li><span class="mark ok">PASS</span><span>Hover lifts the card<span class="detail">lift 5px</span></span></li>
+<li><span class="mark ok">PASS</span><span>Hover turns the border blue and adds a glow<span class="detail">rgb(40, 109, 192)</span></span></li>
+<li><span class="mark ok">PASS</span><span>Size chips show exactly what is in stock in the database<span class="detail">XS S M L XL XXL</span></span></li>
+<li><span class="mark ok">PASS</span><span>Sold-out sizes are grey with a line through them<span class="detail">{"deco":"line-through","bg":"rgb(236, 235, 230)"}</span></span></li>
+</ul></details>
+</article>
+<article class="check" id="c10">
+<h3>10. Card hover effect <span class="pill ok">PASS</span></h3>
+<figure><img alt="Card hover effect" src="app_check_images/card-hover.png"></figure>
+<p class="proves"><b>What this shows:</b> The card under the mouse has lifted about 5 pixels and its border glows blue, so it is clear which card you are about to open.</p>
+<p class="detail">Automated assertions for this feature are listed under its first screenshot.</p>
+</article>
+<article class="check" id="c11">
+<h3>11. Product detail page <span class="pill ok">PASS</span></h3>
+<figure><img alt="Product detail page" src="app_check_images/detail.png"></figure>
+<p class="proves"><b>What this shows:</b> A large picture sits beside the price, description and size buttons. In-stock sizes are blue buttons and sold-out sizes are grey and crossed out, exactly matching quantity 0 in the database.</p>
+<details open><summary>Automated assertions for this feature (8/8 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Clicking a card opens /products/&lt;id&gt;<span class="detail">http://localhost:5173/products/champion-reverse-weave-crewneck</span></span></li>
+<li><span class="mark ok">PASS</span><span>Large picture is shown<span class="detail">547px wide</span></span></li>
+<li><span class="mark ok">PASS</span><span>Price and description come from the database</span></li>
+<li><span class="mark ok">PASS</span><span>All 6 sizes are listed</span></li>
+<li><span class="mark ok">PASS</span><span>In-stock sizes are blue buttons<span class="detail">M XL</span></span></li>
+<li><span class="mark ok">PASS</span><span>Sold-out sizes are greyed out, crossed and cannot be clicked<span class="detail">XS S L XXL</span></span></li>
+<li><span class="mark ok">PASS</span><span>Sold-out sizes are exactly the ones at quantity 0 in the database<span class="detail">{"L":"0","M":"12","S":"0","XL":"12","XS":"0","XXL":"0"}</span></span></li>
+<li><span class="mark ok">PASS</span><span>Picking a size shows the exact count in stock<span class="detail">M: 12 in stock.</span></span></li>
+</ul></details>
+</article>
+<article class="check" id="c12">
+<h3>12. Gold sale badge (simulated data) <span class="pill ok">PASS</span></h3>
+<figure><img alt="Gold sale badge (simulated data)" src="app_check_images/sale-badge.png"></figure>
+<p class="proves"><b>What this shows:</b> A flagged item shows a small gold "Sale" badge and its old price crossed out. The database contains no sale items, so one item was flagged in a test response to show the design; unflagged items have no badge.</p>
+<details open><summary>Automated assertions for this feature (3/3 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Flagged item shows a small gold "Sale" badge<span class="detail">{"t":"Sale","bg":"rgb(201, 162, 74)","size":53.40625}</span></span></li>
+<li><span class="mark ok">PASS</span><span>Old price is shown crossed out next to the new price</span></li>
+<li><span class="mark ok">PASS</span><span>Items without sale data show no badge</span></li>
+</ul></details>
+</article>
+<article class="check" id="c13">
+<h3>13. Create account form <span class="pill ok">PASS</span></h3>
+<figure><img alt="Create account form" src="app_check_images/signup-mismatch.png"></figure>
+<p class="proves"><b>What this shows:</b> The sign-up form asks for first name, last name, email, password and confirm password, and it stops a mismatched confirmation before anything is sent.</p>
+<details open><summary>Automated assertions for this feature (5/5 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Every sign-up field sits inside the form card</span></li>
+<li><span class="mark ok">PASS</span><span>Mismatched confirm password shows an error and blocks the button</span></li>
+<li><span class="mark ok">PASS</span><span>Signing up logs the shopper in ("Hi, Alex")<span class="detail">Hi, Alex 👋</span></span></li>
+<li><span class="mark ok">PASS</span><span>New account saved in the users table<span class="detail">id 31, name "Alex Rivera"</span></span></li>
+<li><span class="mark ok">PASS</span><span>Password is stored as a salted PBKDF2 hash, never plain text<span class="detail">pbkdf2_sha256, 600000 rounds, 32-char salt</span></span></li>
+</ul></details>
+</article>
+<article class="check" id="c14">
+<h3>14. Signed up and logged in <span class="pill ok">PASS</span></h3>
+<figure><img alt="Signed up and logged in" src="app_check_images/signed-up.png"></figure>
+<p class="proves"><b>What this shows:</b> After sign-up the banner greets the shopper by name and offers Log out. The database check confirms the new row exists with a salted PBKDF2 hash and no plain-text password.</p>
+<p class="detail">Automated assertions for this feature are listed under its first screenshot.</p>
+</article>
+<article class="check" id="c15">
+<h3>15. Log in: wrong password message <span class="pill ok">PASS</span></h3>
+<figure><img alt="Log in: wrong password message" src="app_check_images/login-error.png"></figure>
+<p class="proves"><b>What this shows:</b> A wrong password gives one clear message that does not reveal whether the email exists. The next assertions show the seeded test user can log in and stay logged in after a refresh.</p>
+<details open><summary>Automated assertions for this feature (4/4 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Log out returns the Log in / Create account links</span></li>
+<li><span class="mark ok">PASS</span><span>Wrong password shows "Incorrect email or password."</span></li>
+<li><span class="mark ok">PASS</span><span>The seeded test user can log in<span class="detail">Hi, Test 👋</span></span></li>
+<li><span class="mark ok">PASS</span><span>Login survives a page refresh</span></li>
+</ul></details>
+</article>
+<article class="check" id="c16">
+<h3>16. Bulldog Bot chat window <span class="pill ok">PASS</span></h3>
+<figure><img alt="Bulldog Bot chat window" src="app_check_images/chat-open.png"></figure>
+<p class="proves"><b>What this shows:</b> The chat opens from the bottom-right corner with a blue "Bulldog Bot" header, a bulldog face, a mascot-voice greeting and tap-to-send starter questions.</p>
+<details open><summary>Automated assertions for this feature (4/4 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Chat launcher is in the bottom-right corner</span></li>
+<li><span class="mark ok">PASS</span><span>Header says "Bulldog Bot" on a blue background with the bulldog face<span class="detail">{"title":"Bulldog Bot","bg":"rgb(0, 53, 107)","face":1}</span></span></li>
+<li><span class="mark ok">PASS</span><span>Suggested-question chips are shown<span class="detail">What hoodies do you have? | Anything with a bulldog on it? | What's your cheapest item? | Show me crewnecks</span></span></li>
+<li><span class="mark ok">PASS</span><span>Greeting is in the mascot voice</span></li>
+</ul></details>
+</article>
+<article class="check" id="c17">
+<h3>17. Sold-out size stated clearly <span class="pill ok">PASS</span></h3>
+<figure><img alt="Sold-out size stated clearly" src="app_check_images/stock-answer.png"></figure>
+<p class="proves"><b>What this shows:</b> For a size with quantity 0 in the database, the agent says plainly that it is sold out and offers the sizes that are in stock, instead of pretending it is available.</p>
+<p class="detail">Automated assertions for this feature are listed under its first screenshot.</p>
+</article>
+<article class="check" id="c18">
+<h3>18. The agent knows which product you are viewing <span class="pill ok">PASS</span></h3>
+<figure><img alt="The agent knows which product you are viewing" src="app_check_images/page-context.png"></figure>
+<p class="proves"><b>What this shows:</b> On the Champion Full Zip Hood page, "do you have this in pink?" was answered for that hoodie without naming it, and the colors it lists match the database.</p>
+<details open><summary>Automated assertions for this feature (2/2 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Answer is about the Champion Full Zip Hood without naming it<span class="detail">Woof—this Champion Full Zip Hood isn’t offered in pink. The listed colors are charcoal gray, white, and navy b</span></span></li>
+<li><span class="mark ok">PASS</span><span>It correctly says there is no pink and lists the real colours<span class="detail">charcoal gray, white, navy blue</span></span></li>
+</ul></details>
+</article>
+<article class="check" id="c19">
+<h3>19. Compare two items <span class="pill ok">PASS</span></h3>
+<figure><img alt="Compare two items" src="app_check_images/compare.png"></figure>
+<p class="proves"><b>What this shows:</b> The agent compared two hoodies side by side, and the prices and the price gap it quoted match the database. Both items are shown as cards in the chat.</p>
+<details open><summary>Automated assertions for this feature (3/3 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Both database prices appear in the answer<span class="detail">$68.0 and $45.0</span></span></li>
+<li><span class="mark ok">PASS</span><span>Price gap is correct<span class="detail">gap $23</span></span></li>
+<li><span class="mark ok">PASS</span><span>Both items appear as cards in the chat</span></li>
+</ul></details>
+</article>
+<article class="check" id="c20">
+<h3>20. Customer memory across visits <span class="pill ok">PASS</span></h3>
+<figure><img alt="Customer memory across visits" src="app_check_images/memory.png"></figure>
+<p class="proves"><b>What this shows:</b> After logging out and back in, the earlier conversation was loaded from the chat_messages table and the agent remembered the shopper's size and interest. It also knew the shopper's name and email.</p>
+<details open><summary>Automated assertions for this feature (5/5 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Agent knows the shopper's name and email<span class="detail">You’re Alex Rivera, and the email on your account is apptest.1790733537433@example.com.</span></span></li>
+<li><span class="mark ok">PASS</span><span>Each message and reply is saved in chat_messages<span class="detail">4 rows for user 31</span></span></li>
+<li><span class="mark ok">PASS</span><span>Logging out clears the chat window</span></li>
+<li><span class="mark ok">PASS</span><span>Coming back: the earlier conversation is loaded again<span class="detail">2 of your messages restored</span></span></li>
+<li><span class="mark ok">PASS</span><span>Agent remembers from the saved history<span class="detail">You said you wear size M, and you were into hockey apparel. 🏒</span></span></li>
+</ul></details>
+</article>
+<article class="check" id="c21">
+<h3>21. Guests can chat but are not stored <span class="pill ok">PASS</span></h3>
+<figure><img alt="Guests can chat but are not stored" src="app_check_images/guest.png"></figure>
+<p class="proves"><b>What this shows:</b> A logged-out visitor got real answers, but no rows were added to chat_messages and the agent did not know who they were.</p>
+<details open><summary>Automated assertions for this feature (3/3 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>A guest gets an answer</span></li>
+<li><span class="mark ok">PASS</span><span>No rows were added to chat_messages for the guest<span class="detail">34 rows before, 34 after</span></span></li>
+<li><span class="mark ok">PASS</span><span>Guest is not given a name or email<span class="detail">You’re browsing as a guest, so I don’t know your name. If you log in, Bulldog Bot can remember your </span></span></li>
+</ul></details>
+</article>
+<article class="check" id="c22">
+<h3>22. Chat rate limit <span class="pill ok">PASS</span></h3>
+<figure><img alt="Chat rate limit" src="app_check_images/rate-limit.png"></figure>
+<p class="proves"><b>What this shows:</b> After a burst of 12 messages in a second, the server refused the extras and the chat shows a polite "please wait" message instead of an error.</p>
+<details open><summary>Automated assertions for this feature (2/2 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>A burst of 12 messages is limited (HTTP 429)<span class="detail">2 answered, 10 refused</span></span></li>
+<li><span class="mark ok">PASS</span><span>The chat shows the friendly wait message<span class="detail">You're sending messages very quickly. Please wait about 14 seconds and try again.</span></span></li>
+</ul></details>
+</article>
+<article class="check" id="c23">
+<h3>23. Phone-sized screen <span class="pill ok">PASS</span></h3>
+<figure><img alt="Phone-sized screen" src="app_check_images/mobile-menu.png"></figure>
+<p class="proves"><b>What this shows:</b> At phone width the blue banner folds into a menu button that opens a list of all five links, and the page does not scroll sideways.</p>
+<details open><summary>Automated assertions for this feature (9/9 passed)</summary><ul class="checks">
+<li><span class="mark ok">PASS</span><span>Menu button replaces the link row</span></li>
+<li><span class="mark ok">PASS</span><span>Menu opens with all links</span></li>
+<li><span class="mark ok">PASS</span><span>No sideways scrolling</span></li>
+<li><span class="mark ok">PASS</span><span>At 390px wide every card fits the screen, with square photos that never overlap the text<span class="detail">102 cards, no sideways scroll</span></span></li>
+<li><span class="mark ok">PASS</span><span>At 566px wide every card fits the screen, with square photos that never overlap the text<span class="detail">102 cards, no sideways scroll</span></span></li>
+<li><span class="mark ok">PASS</span><span>At 700px wide every card fits the screen, with square photos that never overlap the text<span class="detail">102 cards, no sideways scroll</span></span></li>
+<li><span class="mark ok">PASS</span><span>On a phone the hoodie moves below the text and the hero fits the screen<span class="detail">{"below":true,"fits":true}</span></span></li>
+<li><span class="mark ok">PASS</span><span>On a phone the sign-up form fits its card and the screen</span></li>
+<li><span class="mark ok">PASS</span><span>On a phone the log-in form fits its card and the screen</span></li>
+</ul></details>
+</article>
+
+<footer>Re-run with <code>cd tests &amp;&amp; npm install &amp;&amp; node app_check.mjs</code> (start the backend and frontend first). The run creates one throwaway account and deletes it at the end; the seeded test user is used for the log-in check. The screenshots are separate files in <code>output/app_check_images/</code>, so keep that folder next to this page.</footer>
+</main></body></html>

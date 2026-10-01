@@ -1,0 +1,10 @@
+# Back end (FastAPI + PydanticAI agent)
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-dotenv>=1.0
+pydantic-ai-slim[openai]>=1.0
+
+# Only for backend/scripts/make_web_images.py (white-background copies of the product photos)
+pillow>=10
+numpy>=1.26
+scipy>=1.11

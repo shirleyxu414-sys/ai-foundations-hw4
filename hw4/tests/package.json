@@ -1,0 +1,7 @@
+{
+  "name": "campus-customs-app-check",
+  "private": true,
+  "type": "module",
+  "scripts": { "check": "node app_check.mjs" },
+  "dependencies": { "puppeteer-core": "^24.0.0" }
+}
