@@ -117,3 +117,4 @@ One section per problem. Each section has the problem number/title, the prompts 
 
 - Now work on Problem 13: push to Github and submit the url
 - put your code in a folder named hw4
+- Use .gitignore. Include .env.example with placeholders only
