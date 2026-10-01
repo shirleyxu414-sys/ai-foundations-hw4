@@ -8,22 +8,37 @@ A shopping site for officially licensed Yale apparel with a built-in chatbot, "B
 
 Every price and stock number the chatbot gives comes from `data/campus_customs.db`.
 
+## The agent
+
+**The agent itself is four files under `backend/`:**
+
+| File | What it holds |
+|---|---|
+| `prompts/prompt.md` | the system prompt: voice, tool rules, reply format and safety rules |
+| `agent.py` | the agent entry point: model, prompt loading, reply checks, audit entry |
+| `tools.py` | the tools the agent can call (search, description, price, stock, compare, overview) |
+| `models.py` | the Pydantic / PydanticAI types for tool results, replies and API bodies |
+
+`main.py` is the FastAPI app that serves the agent (run it with `uvicorn`). `db.py`, `auth.py`, `limits.py` and `audit.py` are plain helpers for the database, logins, rate limiting and the audit trail.
+
 ## Files
 
 ```
 hw4/
 ├── AI_prompts.md          # every prompt typed to the AI coding assistant, by problem
 ├── requirements.txt       # Python packages
-├── .env.example           # names of the secrets (copy to .env)
+├── .env.example           # names of the secrets, placeholders only (copy to .env)
 ├── .gitignore
 ├── README.md
 ├── frontend/              # Vite React TypeScript app
 ├── backend/
-│   ├── main.py            # FastAPI app: run with uvicorn
-│   ├── agent.py           # the agent: model, prompt, reply checks, audit
-│   ├── models.py          # Pydantic / PydanticAI types
-│   ├── tools.py           # tools the agent can call
-│   └── prompts/prompt.md  # system prompt (voice, tool rules, safety rules)
+│   ├── main.py            # FastAPI app: run with uvicorn main:app --reload --port 8000
+│   ├── agent.py           # } the agent:
+│   ├── tools.py           # }
+│   ├── models.py          # }
+│   ├── prompts/prompt.md  # }
+│   ├── db.py, auth.py, limits.py, audit.py   # helpers
+│   └── scripts/make_web_images.py            # builds white-background photo copies
 ├── tests/app_check.mjs    # tests the live site in Chrome and writes output/app_check.html
 └── output/
     ├── harness.md         # how the whole system works
@@ -36,17 +51,17 @@ hw4/
 
 ## Local-only data pack (not in git)
 
-Put the data pack in a `data/` folder next to `backend/`:
+The database and product photos are not in the repository. Before running anything, place the data pack in a `data/` folder inside `hw4/`, next to `backend/` and `frontend/`:
 
 ```
-data/
+hw4/data/
 ├── campus_customs.db
 └── products/              # product photos referenced by the catalogue table
 ```
 
-## Set up
+## Set up (after placing the data pack)
 
-You need Python 3.11+ and Node 20+.
+You need Python 3.11+ and Node 20+. Run these from the `hw4/` folder.
 
 ```bash
 # 1. secrets: copy the template, then fill in your real values (never commit .env)
@@ -66,26 +81,30 @@ python backend/scripts/make_web_images.py
 cd frontend && npm install && cd ..
 ```
 
-Step 3 is optional: without it the site still works but some photos show their original black backgrounds.
+Step 3 is optional: without it the site still works, but some photos show their original black backgrounds.
 
-## Run
+## Run the back end
 
-Two terminals.
+In one terminal, from the `backend/` folder:
 
 ```bash
-# back end (run from the backend/ folder)
 cd backend
 source .venv/bin/activate
 uvicorn main:app --reload --port 8000
 ```
 
+The API is then at http://127.0.0.1:8000 (for example `/api/products`).
+
+## Run the front end
+
+In a second terminal, from the `frontend/` folder:
+
 ```bash
-# front end
 cd frontend
 npm run dev
 ```
 
-Open **http://localhost:5173**. The front end forwards `/api` and `/media` to the back end on port 8000.
+Open **http://localhost:5173**. The front end forwards `/api` and `/media` to the back end on port 8000, so start the back end first.
 
 Test login from the database: `test@campuscustoms.yale.edu` (password from the assignment), or create your own account.
 

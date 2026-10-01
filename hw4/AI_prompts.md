@@ -118,3 +118,4 @@ One section per problem. Each section has the problem number/title, the prompts 
 - Now work on Problem 13: push to Github and submit the url
 - put your code in a folder named hw4
 - Use .gitignore. Include .env.example with placeholders only
+- Please note that the agent itself is four files under backend/: prompts/prompt.md, agent.py, tools.py and models.py. README.md should tell how to run the front end and back end after placing the data pack.
