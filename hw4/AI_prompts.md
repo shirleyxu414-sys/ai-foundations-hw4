@@ -119,6 +119,3 @@ One section per problem. Each section has the problem number/title, the prompts 
 - put your code in a folder named hw4
 - Use .gitignore. Include .env.example with placeholders only
 - Please note that the agent itself is four files under backend/: prompts/prompt.md, agent.py, tools.py and models.py. README.md should tell how to run the front end and back end after placing the data pack.
-- Is my code pushed to Github?
-- What should I submit (screenshot of the Canvas HW4 page: submit a GitHub repo URL with the app code)
-- All good? (screenshot of the GitHub repository page)
